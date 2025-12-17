@@ -1,4 +1,4 @@
-import { FlaskConical } from "lucide-react"
+import Image from "next/image"
 
 export default function LabReport() {
   return (
@@ -10,8 +10,14 @@ export default function LabReport() {
       <div className="border-b-2 border-green-600 bg-gradient-to-r from-green-50 to-white p-4">
         <div className="flex items-start justify-between gap-4">
           {/* Logo Area */}
-          <div className="w-14 h-14 border-2 border-green-300 rounded flex items-center justify-center bg-green-50 flex-shrink-0">
-            <FlaskConical className="w-7 h-7 text-green-600" />
+          <div className="w-52 h-52 border-2 border-green-300 rounded flex items-center justify-center bg-green-50 flex-shrink-0 overflow-hidden">
+            <Image 
+              src="/logo1.png" 
+              alt="Lab Logo" 
+              width={208} 
+              height={208}
+              className="object-contain"
+            />
           </div>
 
           {/* Lab Info */}
@@ -131,7 +137,6 @@ export default function LabReport() {
             <p>Dabgari Garden, Peshawar</p>
           </div>
         </div>
-      </div>
       </div>
     </div>
   )

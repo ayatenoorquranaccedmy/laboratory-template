@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { useState, useRef } from "react"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card } from "@/components/ui/card"
@@ -356,8 +357,14 @@ export default function ReportForm({ onSubmit }: ReportFormProps) {
       <div className="max-w-7xl mx-auto">
         <div className="mb-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">GL</span>
+            <div className="w-40 h-40 rounded-lg flex items-center justify-center overflow-hidden">
+              <Image 
+                src="/logo1.png" 
+                alt="Lab Logo" 
+                width={160} 
+                height={160}
+                className="object-contain"
+              />
             </div>
             <div>
               <h1 className="text-3xl font-bold text-gray-900">GREEN MEDICAL LABORATORY</h1>
@@ -425,14 +432,13 @@ export default function ReportForm({ onSubmit }: ReportFormProps) {
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Referred By Doctor *</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Referred By Doctor</label>
                 <Input
                   type="text"
                   name="referredByDoctor"
                   value={formData.referredByDoctor}
                   onChange={handleInputChange}
                   placeholder="Doctor Name"
-                  required
                   className="border-gray-300"
                 />
               </div>

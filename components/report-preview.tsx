@@ -1,5 +1,7 @@
 "use client"
 
+import Image from "next/image"
+
 interface SelectedTest {
   category: string
   testName: string
@@ -54,8 +56,14 @@ export default function ReportPreview({ data }: ReportPreviewProps) {
       <div className="border-b-4 border-green-600 pb-1 mb-2 print:border-b-2 report-header">
         <div className="flex items-start justify-between mb-4 print:mb-1">
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 bg-green-600 rounded-lg flex items-center justify-center print:w-12 print:h-12">
-              <span className="text-white font-bold text-2xl print:text-xl">GL</span>
+            <div className="w-40 h-40  rounded-lg flex items-center justify-center print:w-28 print:h-28 overflow-hidden">
+              <Image 
+                src="/logo1.png" 
+                alt="Lab Logo" 
+                width={160} 
+                height={160}
+                className="object-contain print:w-28 print:h-28"
+              />
             </div>
             <div>
               <h1 className="text-3xl font-bold text-green-700 print:text-2xl">GREEN MEDICAL LABORATORY</h1>
@@ -93,7 +101,7 @@ export default function ReportPreview({ data }: ReportPreviewProps) {
             </div>
             <div>
               <p className="text-gray-600 text-sm font-semibold print:text-xs">Referred By</p>
-              <p className="text-gray-900 font-semibold print:text-sm">{data.referredByDoctor}</p>
+              <p className="text-gray-900 font-semibold print:text-sm">{data.referredByDoctor || "None"}</p>
             </div>
             <div>
               <p className="text-gray-600 text-sm font-semibold print:text-xs mb-1">Investigation</p>
@@ -196,11 +204,11 @@ export default function ReportPreview({ data }: ReportPreviewProps) {
 
           {/* Consultant Pathologist block */}
           {/* <p className=" px-28 print:px-18"> */}
-          <p className="">
+          
           <p className="font-semibold mb-0.5 print:mb-0.5 text-gray-800">Consultant Pathologist</p>
           <p>Dr. Ayub Khan</p>
           <p className="mb-2 print:mb-2">M.B.B.S (PMDC) R.M.P</p>
-          </p>
+          
           
 
           {/* Address block in two lines */}
