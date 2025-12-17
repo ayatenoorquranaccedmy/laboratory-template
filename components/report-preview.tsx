@@ -49,9 +49,9 @@ export default function ReportPreview({ data }: ReportPreviewProps) {
   const categories = Object.keys(testsByCategory)
 
   return (
-    <div className="bg-white p-8 md:p-10 rounded-lg print:rounded-none shadow-lg print:shadow-none border print:border-none print:relative print:min-h-screen print:box-border print:p-5 print:pt-5 print:px-6 print:pb-0">
+    <div className="bg-white p-8 md:p-10 rounded-lg print:rounded-none shadow-lg print:shadow-none border print:border-none report-page">
       {/* Header */}
-      <div className="border-b-4 border-green-600 pb-1 mb-2 print:border-b-2 print:pb-3">
+      <div className="border-b-4 border-green-600 pb-1 mb-2 print:border-b-2 report-header">
         <div className="flex items-start justify-between mb-4 print:mb-1">
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 bg-green-600 rounded-lg flex items-center justify-center print:w-12 print:h-12">
@@ -72,7 +72,7 @@ export default function ReportPreview({ data }: ReportPreviewProps) {
       </div>
 
       {/* Main content */}
-      <div className="print:pb-[55mm]">
+      <div className="report-body">
         {/* Patient Information */}
         <div className="mb-4 print:mb-3">
           <h2 className="text-lg font-bold text-green-700 mb-3 pb-2 border-b-2 border-green-300 print:text-base print:mb-2 print:pb-1">
@@ -186,7 +186,7 @@ export default function ReportPreview({ data }: ReportPreviewProps) {
       </div>
 
       {/* Footer Section */}
-      <div className="pt-6 print:pt-2 print:fixed print:bottom-[10mm] print:left-[10mm] print:right-[10mm]">
+      <div className="pt-6   print:pt-2  report-footer ">
         <div className="text-sm text-gray-700 print:text-xs print:leading-relaxed">
           {/* Note line like sample */}
           <p className="mb-3 print:mb-2 text-gray-800 text-center">
