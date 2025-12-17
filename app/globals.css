@@ -124,48 +124,41 @@
   }
 }
 
-/* <CHANGE> Print styles for laboratory report PDF generation */
+/* Print styles for laboratory report PDF generation */
 @media print {
   @page {
     size: A4;
-    margin: 0.5in;
-    /* Remove browser headers and footers */
-    margin-top: 0.5in;
-    margin-bottom: 0.5in;
+    margin: 10mm 10mm;
   }
 
-  html {
-    background: white;
-    height: auto;
-  }
-
+  html,
   body {
     background: white !important;
     padding: 0 !important;
     margin: 0 !important;
+    height: auto;
+  }
+
+  body {
     font-size: 12pt;
     line-height: 1.4;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
-    height: auto;
   }
 
-  /* Hide browser UI elements and headers/footers */
-  body::before,
-  body::after {
-    display: none !important;
-    content: none !important;
-  }
-
-  /* Hide any browser navigation elements and UI */
-  nav,
-  header:not(.print-header),
-  footer:not(.print-footer),
+  /* Hide elements marked as no-print */
   .no-print,
-  button,
   .no-print * {
     display: none !important;
     visibility: hidden !important;
+  }
+
+  /* Hide browser UI elements */
+  nav,
+  header:not(.print-header),
+  footer:not(.print-footer),
+  button {
+    display: none !important;
   }
 
   /* Hide form elements that shouldn't print */
@@ -175,24 +168,6 @@
   select,
   textarea {
     display: none !important;
-  }
-
-  /* Show only the report content */
-  .min-h-screen {
-    min-height: auto !important;
-    background: white !important;
-  }
-
-  .bg-gradient-to-br {
-    background: white !important;
-  }
-
-  .print\:shadow-none {
-    box-shadow: none !important;
-  }
-
-  .print\:rounded-none {
-    border-radius: 0 !important;
   }
 
   /* Ensure tables don't break across pages awkwardly */
@@ -213,36 +188,9 @@
     display: table-footer-group;
   }
 
-  /* Prevent page breaks inside category sections */
-  .print\:break-inside-avoid {
-    page-break-inside: avoid;
-  }
-
-  /* Footer section styling */
-  .print\:footer-section {
-    margin-top: auto;
-    padding-top: 1rem;
-    border-top: 2px solid #9ca3af;
-    page-break-inside: avoid;
-  }
-
-  /* Ensure footer columns display properly in print */
-  .print\:footer-section .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-  }
-
   /* Ensure only visible content prints with exact colors */
   * {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
-  }
-
-  /* Remove any background gradients or images that might interfere */
-  .bg-gradient-to-br,
-  .from-gray-50,
-  .to-gray-100 {
-    background: white !important;
   }
 }

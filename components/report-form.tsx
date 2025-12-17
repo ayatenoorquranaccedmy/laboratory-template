@@ -217,6 +217,33 @@ export default function ReportForm({ onSubmit }: ReportFormProps) {
     setSelectedCategory("") // Reset dropdown after selection
   }
 
+  const handleCategoryRemove = (categoryName: string) => {
+    // Remove category from visible/selected categories
+    setSelectedCategories((prev) => {
+      const next = new Set(prev)
+      next.delete(categoryName)
+      return next
+    })
+
+    // Remove all tests that belong to this category
+    setSelectedTests((prev) => {
+      const newTests: Record<string, SelectedTest> = {}
+      Object.entries(prev).forEach(([key, value]) => {
+        if (!key.startsWith(`${categoryName}-`)) {
+          newTests[key] = value
+        }
+      })
+      return newTests
+    })
+
+    // Clean up any stored input refs for this category
+    Object.keys(resultInputRefs.current).forEach((key) => {
+      if (key.startsWith(`${categoryName}-`)) {
+        delete resultInputRefs.current[key]
+      }
+    })
+  }
+
   const handleCheckboxChange = (categoryName: string, testName: string, checked: boolean) => {
     const key = `${categoryName}-${testName}`
     if (checked) {
@@ -471,10 +498,17 @@ export default function ReportForm({ onSubmit }: ReportFormProps) {
                 {visibleCategories.map((category, categoryIndex) => (
                   <div key={categoryIndex} className="border border-gray-300 rounded-sm overflow-hidden">
                     {/* Category Header */}
-                    <div className="bg-gray-200 px-4 py-2">
+                    <div className="bg-gray-200 px-4 py-2 flex items-center justify-between gap-2">
                       <h3 className="text-base md:text-lg font-bold text-gray-800 uppercase tracking-wide">
                         {category.name}
                       </h3>
+                      <button
+                        type="button"
+                        onClick={() => handleCategoryRemove(category.name)}
+                        className="text-xs font-semibold text-red-600 hover:text-red-700 hover:underline"
+                      >
+                        Cancel
+                      </button>
                     </div>
 
                     {/* Tests Table */}

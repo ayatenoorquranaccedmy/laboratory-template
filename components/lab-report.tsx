@@ -96,24 +96,42 @@ export default function LabReport() {
       </div>
 
       {/* Signatures */}
-        <div className="grid grid-cols-2 gap-6 mb-3">
-          <div className="border-t border-gray-400 pt-2 text-center">
-            <div className="h-8 mb-1"></div>
-            <p className="text-xs font-semibold text-gray-700">Technician</p>
-            <p className="text-xs text-gray-600">Name: _______</p>
-          </div>
-          <div className="border-t border-gray-400 pt-2 text-center">
-            <div className="h-8 mb-1"></div>
-            <p className="text-xs font-semibold text-gray-700">Authorized By</p>
-            <p className="text-xs text-gray-600">Name: _______</p>
-          </div>
+      <div className="grid grid-cols-2 gap-6 mb-3">
+        <div className="border-t border-gray-400 pt-2 text-center">
+          <div className="h-8 mb-1"></div>
+          <p className="text-xs font-semibold text-gray-700">Technician</p>
+          <p className="text-xs text-gray-600">Name: _______</p>
         </div>
+        <div className="border-t border-gray-400 pt-2 text-center">
+          <div className="h-8 mb-1"></div>
+          <p className="text-xs font-semibold text-gray-700">Authorized By</p>
+          <p className="text-xs text-gray-600">Name: _______</p>
+        </div>
+      </div>
 
-        {/* Footer Info */}
-        <div className="border-t border-green-200 pt-2 text-center text-xs text-gray-600">
-          <p className="mb-0.5">This report is confidential. Valid for 3 months from analysis date.</p>
-          <p className="text-gray-500">Contact: [Phone] | Email: [Email]</p>
+      {/* Footer Info */}
+      <div className="border-t border-green-200 pt-3 mt-1 text-xs text-gray-700">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div>
+            <p className="font-semibold text-gray-800 mb-0.5">Note:</p>
+            <p>This is a computer-generated report and does not require a signature.</p>
+          </div>
+
+          <div>
+            <p className="font-semibold text-gray-800 mb-0.5">Consultant Pathologist:</p>
+            <p>Dr. Ayub Khan</p>
+            <p>M.B.B.S (PMDC), R.M.P</p>
+          </div>
+
+          <div>
+            <p className="font-semibold text-gray-800 mb-0.5">Laboratory Address:</p>
+            <p>Green Medical Laboratory</p>
+            <p>First Floor, Cantonment Plaza</p>
+            <p>Near Ibrahimi Medical Center</p>
+            <p>Dabgari Garden, Peshawar</p>
+          </div>
         </div>
+      </div>
       </div>
     </div>
   )
