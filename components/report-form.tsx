@@ -205,6 +205,18 @@ export default function ReportForm({ onSubmit }: ReportFormProps) {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
+    
+    // Allow intermediate typing for age, but validate final value on submit
+    // Only prevent obviously invalid inputs (negative numbers)
+    if (name === "age" && value !== "" && value !== "-") {
+      const ageNum = parseInt(value, 10)
+      // Allow empty, single digits, or numbers within valid range while typing
+      // But prevent values that are clearly out of range
+      if (!isNaN(ageNum) && (ageNum < 0 || ageNum > 100)) {
+        return // Prevent updating with invalid values
+      }
+    }
+    
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -332,6 +344,14 @@ export default function ReportForm({ onSubmit }: ReportFormProps) {
 
   const handleSubmit = (e: React.FormEvent, shouldPrintAfterSave: boolean = false) => {
     e.preventDefault()
+    
+    // Validate age
+    const ageNum = parseInt(formData.age, 10)
+    if (isNaN(ageNum) || ageNum <= 0 || ageNum > 100) {
+      alert("Please enter a valid age between 1 and 100.")
+      return
+    }
+    
     // Only include checked tests with results
     const selectedTestsArray = Object.values(selectedTests).filter(
       (test) => test.checked && test.result.trim() !== ""
@@ -401,6 +421,8 @@ export default function ReportForm({ onSubmit }: ReportFormProps) {
                   value={formData.age}
                   onChange={handleInputChange}
                   placeholder="Age"
+                  min="1"
+                  max="100"
                   required
                   className="border-gray-300"
                 />

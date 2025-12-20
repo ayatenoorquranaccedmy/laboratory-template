@@ -35,6 +35,22 @@ interface ReportPreviewProps {
   data: ReportData
 }
 
+// Utility function to format date from YYYY-MM-DD to DD-MM-YYYY
+const formatDate = (dateString: string): string => {
+  if (!dateString) return ""
+  // Handle both YYYY-MM-DD format and already formatted dates
+  const parts = dateString.split("-")
+  if (parts.length === 3) {
+    // If it's YYYY-MM-DD format
+    if (parts[0].length === 4) {
+      return `${parts[2]}-${parts[1]}-${parts[0]}`
+    }
+    // If it's already DD-MM-YYYY, return as is
+    return dateString
+  }
+  return dateString
+}
+
 export default function ReportPreview({ data }: ReportPreviewProps) {
   // Group selected tests by category
   const testsByCategory: Record<string, SelectedTest[]> = {}
@@ -51,12 +67,12 @@ export default function ReportPreview({ data }: ReportPreviewProps) {
   const categories = Object.keys(testsByCategory)
 
   return (
-    <div className="bg-white p-8 md:p-10 rounded-lg print:rounded-none shadow-lg print:shadow-none border print:border-none report-page">
+    <div className="bg-white p-8 md:p-2 rounded-lg print:rounded-none shadow-lg print:shadow-none border print:border-none report-page">
       {/* Header */}
       <div className="border-b-4 border-green-600 pb-1 mb-2 print:border-b-2 report-header">
         <div className="flex items-start justify-between mb-4 print:mb-1">
           <div className="flex items-center gap-4">
-            <div className="w-40 h-40  rounded-lg flex items-center justify-center print:w-28 print:h-28 overflow-hidden">
+            <div className="w-40 h-40  rounded-lg flex items-center justify-center print:w-20 print:h-20 overflow-hidden">
               <Image 
                 src="/logo1.png" 
                 alt="Lab Logo" 
@@ -73,7 +89,7 @@ export default function ReportPreview({ data }: ReportPreviewProps) {
           </div>
           <div className="text-right">
             <p className="text-gray-600 print:text-sm">
-              <span className="font-semibold">Date:</span> {data.date}
+              <span className="font-semibold">Date:</span> {formatDate(data.date)}
             </p>
           </div>
         </div>
@@ -116,6 +132,7 @@ export default function ReportPreview({ data }: ReportPreviewProps) {
         {/* Test Results Section - Only Selected Tests */}
         {categories.length > 0 ? (
           <div className="mb-6 print:mb-4">
+            <p className="border-b-4 border-green-600 pb-1 mb-2 print:border-b-2 report-header"></p>
             <h2 className="text-lg font-bold text-gray-800 mb-4 pb-2 border-b-2 border-gray-300 print:text-base print:mb-3 print:pb-1">
               TEST RESULTS
             </h2>
