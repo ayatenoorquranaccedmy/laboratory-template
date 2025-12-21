@@ -133,7 +133,7 @@ export default function ReportPreview({ data }: ReportPreviewProps) {
         {categories.length > 0 ? (
           <div className="mb-6 print:mb-4">
             <p className="border-b-4 border-green-600 pb-1 mb-2 print:border-b-2 report-header"></p>
-            <h2 className="text-lg font-bold text-gray-800 mb-4 pb-2 border-b-2 border-gray-300 print:text-base print:mb-3 print:pb-1">
+            <h2 className="text-lg font-bold text-green-700 mb-4 pb-2 border-b-2 border-green-300 print:text-base print:mb-3 print:pb-1">
               TEST RESULTS
             </h2>
 
