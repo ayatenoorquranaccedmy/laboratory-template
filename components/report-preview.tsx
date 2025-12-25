@@ -54,7 +54,7 @@ const formatDate = (dateString: string): string => {
 export default function ReportPreview({ data }: ReportPreviewProps) {
   // Group selected tests by category
   const testsByCategory: Record<string, SelectedTest[]> = {}
-  
+
   data.selectedTests
     .filter((test) => test.checked)
     .forEach((test) => {
@@ -67,16 +67,16 @@ export default function ReportPreview({ data }: ReportPreviewProps) {
   const categories = Object.keys(testsByCategory)
 
   return (
-    <div className="bg-white p-8 md:p-2 rounded-lg print:rounded-none shadow-lg print:shadow-none border print:border-none report-page">
+    <div className="bg-white p-8 md:p-2 rounded-lg print:rounded-none shadow-lg print:shadow-none border print:border-none report-page relative min-h-screen">
       {/* Header */}
       <div className="border-b-4 border-green-600 pb-1 mb-2 print:border-b-2 report-header">
         <div className="flex items-start justify-between mb-4 print:mb-1">
           <div className="flex items-center gap-4">
             <div className="w-40 h-40  rounded-lg flex items-center justify-center print:w-20 print:h-20 overflow-hidden">
-              <Image 
-                src="/logo1.png" 
-                alt="Lab Logo" 
-                width={160} 
+              <Image
+                src="/logo1.png"
+                alt="Lab Logo"
+                width={160}
                 height={160}
                 className="object-contain print:w-28 print:h-28"
               />
@@ -102,7 +102,7 @@ export default function ReportPreview({ data }: ReportPreviewProps) {
           <h2 className="text-lg font-bold text-green-700 mb-3 pb-2 border-b-2 border-green-300 print:text-base print:mb-2 print:pb-1">
             Patient Information
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 print:gap-2">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 print:gap-2 print:border-2 print:border-gray-800 print:p-2 print:rounded-sm">
             <div>
               <p className="text-gray-600 text-sm font-semibold print:text-xs">Name</p>
               <p className="text-gray-900 font-semibold print:text-sm">{data.patientName}</p>
@@ -172,9 +172,8 @@ export default function ReportPreview({ data }: ReportPreviewProps) {
                           {tests.map((test, testIndex) => (
                             <tr
                               key={testIndex}
-                              className={`border-b border-gray-200 print:border-gray-300 ${
-                                testIndex % 2 === 0 ? "bg-white" : "bg-gray-50 print:bg-white"
-                              }`}
+                              className={`border-b border-gray-200 print:border-gray-300 ${testIndex % 2 === 0 ? "bg-white" : "bg-gray-50 print:bg-white"
+                                }`}
                             >
                               {/* Test Name Column */}
                               <td className="px-4 py-2.5 text-sm font-medium text-gray-800 print:px-3 print:py-1.5 print:text-xs">
@@ -211,29 +210,36 @@ export default function ReportPreview({ data }: ReportPreviewProps) {
       </div>
 
       {/* Footer Section */}
-      <div className="pt-6   print:pt-2  report-footer ">
-        <div className="text-sm text-gray-700 print:text-xs print:leading-relaxed">
-          {/* Note line like sample */}
-          <p className="mb-3 print:mb-2 text-gray-800 text-center">
-            <span className="font-semibold">Note:</span>{" "}
-            This is a computer-generated report and does not require a signature.
-          </p>
+      {/* FIXED FOOTER WRAPPER */}
+      <div className="fixed-bottom-wrapper print:fixed print:bottom-0 print:left-0 print:w-full">
 
-          {/* Consultant Pathologist block */}
-          {/* <p className=" px-28 print:px-18"> */}
-          
-          <p className="font-semibold mb-0.5 print:mb-0.5 text-gray-800">Consultant Pathologist</p>
-          <p>Dr. Ayub Khan</p>
-          <p className="mb-2 print:mb-2">M.B.B.S (PMDC) R.M.P</p>
-          
-          
+        {/* 1. Note & Signature Section (Just above the gray bar) */}
+        <div className="signature-section px-10 pb-2">
+          <div className="text-sm text-gray-700">
 
-          {/* Address block in two lines */}
-          <p className="text-center print:footer-section">
-            Green Medical Laboratory First Floor Cantonment Plaza Near Ibrahimi Medical Center
-          </p>
-          <p className="text-center">Dabgari Garden Peshawar</p>
+            {/* Note */}
+            <p className="mb-4 text-center text-gray-600 italic text-xs">
+              <span className="font-bold">Note:</span> This is a computer-generated report and does not require a signature.
+            </p>
+
+            {/* Pathologist Signature Block */}
+            <div className="flex flex-col items-start pl-4">
+              <p className="font-bold text-gray-900 text-base mb-0">Consultant Pathologist</p>
+              <p className="text-gray-800 text-sm">Dr. Ayub Khan</p>
+              <p className="text-gray-600 text-xs">M.B.B.S (PMDC) R.M.P</p>
+            </div>
+
+          </div>
         </div>
+
+        {/* 2. Bottom Gray Strip (Flush to Edge) */}
+        <div className="bottom-strip bg-gray-100 border-t-2 border-green-700 py-2">
+          <div className="text-center text-gray-800 text-xs font-medium">
+            <p>Green Medical Laboratory First Floor Cantonment Plaza Near Ibrahimi Medical Center</p>
+            <p>Dabgari Garden Peshawar</p>
+          </div>
+        </div>
+
       </div>
     </div>
   )
