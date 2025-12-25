@@ -88,9 +88,6 @@ export default function ReportPreview({ data }: ReportPreviewProps) {
             </div>
           </div>
           <div className="text-right">
-            <p className="text-gray-600 print:text-sm">
-              <span className="font-semibold">Date:</span> {formatDate(data.date)}
-            </p>
           </div>
         </div>
       </div>
@@ -102,7 +99,7 @@ export default function ReportPreview({ data }: ReportPreviewProps) {
           <h2 className="text-lg font-bold text-green-700 mb-3 pb-2 border-b-2 border-green-300 print:text-base print:mb-2 print:pb-1">
             Patient Information
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 print:gap-2 print:border-2 print:border-gray-800 print:p-2 print:rounded-sm">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 print:gap-2 print:border-2 print:border-gray-800 print:p-2 print:rounded-sm">
             <div>
               <p className="text-gray-600 text-sm font-semibold print:text-xs">Name</p>
               <p className="text-gray-900 font-semibold print:text-sm">{data.patientName}</p>
@@ -114,6 +111,10 @@ export default function ReportPreview({ data }: ReportPreviewProps) {
             <div>
               <p className="text-gray-600 text-sm font-semibold print:text-xs">Gender</p>
               <p className="text-gray-900 font-semibold print:text-sm">{data.gender}</p>
+            </div>
+            <div>
+              <p className="text-gray-600 text-sm font-semibold print:text-xs mb-1">Date</p>
+              <p className="text-gray-900 font-semibold print:text-sm  border-gray-300 pb-1">{formatDate(data.date)}</p>
             </div>
             <div>
               <p className="text-gray-600 text-sm font-semibold print:text-xs">Referred By</p>
