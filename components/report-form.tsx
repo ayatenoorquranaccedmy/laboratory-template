@@ -610,7 +610,7 @@ export default function ReportForm({ onSubmit }: ReportFormProps) {
                                   {isChecked ? (
                                     <Input
                                       type="text"
-                                      value={testData?.normalRange || test.normalRange}
+                                      value={testData?.normalRange}
                                       onChange={(e) => handleNormalRangeChange(category.name, test.name, e.target.value)}
                                       className="w-full h-9 text-sm border-gray-400 focus:border-gray-500 focus:ring-1 focus:ring-gray-400 bg-white"
                                     />
