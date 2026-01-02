@@ -130,7 +130,9 @@ const testCategories: TestCategory[] = [
 ]
 
 export default function TestResultsSection() {
-  const [testResults, setTestResults] = useState<Record<string, { checked: boolean; result: string }>>({})
+  const [testResults, setTestResults] = useState<Record<string, { checked: boolean; result: string; normalRange?: string }>>(
+    {},
+  )
 
   const handleCheckboxChange = (categoryName: string, testName: string, checked: boolean) => {
     const key = `${categoryName}-${testName}`
@@ -152,6 +154,19 @@ export default function TestResultsSection() {
         ...prev[key],
         checked: prev[key]?.checked || false,
         result: value,
+      },
+    }))
+  }
+
+  const handleNormalRangeChange = (categoryName: string, testName: string, value: string) => {
+    const key = `${categoryName}-${testName}`
+    setTestResults((prev) => ({
+      ...prev,
+      [key]: {
+        ...prev[key],
+        checked: prev[key]?.checked || false,
+        result: prev[key]?.result || "",
+        normalRange: value,
       },
     }))
   }
@@ -205,13 +220,14 @@ export default function TestResultsSection() {
                       {category.tests.map((test, testIndex) => {
                         const key = `${category.name}-${test.name}`
                         const testData = testResults[key] || { checked: false, result: "" }
+                        const displayNormalRange =
+                          testData.normalRange !== undefined ? testData.normalRange : test.normalRange
 
                         return (
                           <tr
                             key={testIndex}
-                            className={`border-b border-gray-200 hover:bg-gray-50 transition-colors print:border-gray-300 print:hover:bg-transparent ${
-                              testIndex % 2 === 0 ? "bg-white" : "bg-gray-50 print:bg-white"
-                            }`}
+                            className={`border-b border-gray-200 hover:bg-gray-50 transition-colors print:border-gray-300 print:hover:bg-transparent ${testIndex % 2 === 0 ? "bg-white" : "bg-gray-50 print:bg-white"
+                              }`}
                           >
                             {/* Checkbox Column */}
                             <td className="px-3 py-2.5 print:px-2 print:py-1.5 align-middle">
@@ -252,7 +268,15 @@ export default function TestResultsSection() {
 
                             {/* Normal Range Column */}
                             <td className="px-4 py-2.5 text-sm text-gray-700 print:px-3 print:py-1.5 print:text-xs border-l border-gray-200">
-                              {test.normalRange}
+                              <div className="print:hidden">
+                                <Input
+                                  type="text"
+                                  value={displayNormalRange}
+                                  onChange={(e) => handleNormalRangeChange(category.name, test.name, e.target.value)}
+                                  className="w-full h-9 text-sm border-gray-400 focus:border-gray-500 focus:ring-1 focus:ring-gray-400 bg-white"
+                                />
+                              </div>
+                              <div className="hidden print:block">{displayNormalRange}</div>
                             </td>
                           </tr>
                         )
